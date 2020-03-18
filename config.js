@@ -2,11 +2,13 @@ const path = require('path')
 module.exports = {
 	apps: {
 		admin: {
+			version: '0.0.2',
 			enabled: true,
 			entry: path.resolve(__dirname, './apps/admin'),
 			port: 8080
 		},
 		meishi: {
+			version: '0.0.1',
 			enabled: true,
 			entry: path.resolve(__dirname, './apps/meishi'),
 			port: 8081

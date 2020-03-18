@@ -1,22 +1,19 @@
 const Koa = require('koa')
-const {
-  databases
-} = require('./config')
-const _db = require('@/core/_databases')
-const mysql = require('promise-mysql')
+const http = require('http')
+const databaseConnection = require('./connections/databases')
 module.exports = async function ({
   port,
   entry
 }) {
   const app = new Koa()
   // 批量连接数据库并将句柄存储至中转模块
-  for (let name in databases) {
-    let db = await mysql.createPool(databases[name])
-    _db[name] = db
-  }
+  await databaseConnection()
 
   app.use(require(entry))
-  app.listen(port, () => {
+  const httpServer = http.createServer(app.callback())
+
+  httpServer.listen(port, () => {
     console.log(`server is running`, port)
   })
+  return httpServer
 }
