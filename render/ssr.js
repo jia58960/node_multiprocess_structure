@@ -1,5 +1,7 @@
 const render = require('koa-ejs');
 const minify = require('html-minifier').minify
+const fs = require('promise-fs')
+const path = require('path')
 module.exports = async function (app, config) {
   render(app, {
     root: config.tmplRoot,
@@ -24,5 +26,10 @@ module.exports = async function (app, config) {
         })
       }
     }
+  }
+
+  app.context.writeCache = async function (name, content) {
+    const filePath = path.resolve(config.cacheDir, name)
+    await fs.writeFile(filePath, content)
   }
 }

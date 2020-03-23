@@ -1,4 +1,5 @@
 const path = require('path')
+const mode = process._argv.env === 'dev' ? 'dev' : 'prod'
 module.exports = {
 	apps: {
 		admin: {
@@ -7,6 +8,7 @@ module.exports = {
 			entry: path.resolve(__dirname, './apps/admin'),
 			tmplRoot: path.resolve(__dirname, './apps/admin/template'),
 			minifyTmpl: true,
+			cacheDir: mode === 'dev' ? __dirname : '/usr/share/nginx/html',
 			port: 8080
 		},
 		meishi: {

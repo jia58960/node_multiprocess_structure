@@ -31,14 +31,15 @@ router.get('/d', async (ctx) => {
     ctx.session.count = 0
   }
   ctx.session.count++;
-  ctx.body = `欢迎您第${ctx.session.count}次访问本站`;  
+  ctx.body = `欢迎您第${ctx.session.count}次访问本站`;
 })
 
-router.get('/index.html', async (ctx) => {
+router.get('/a.html', async (ctx) => {
   console.log('渲染了')
   await ctx.render('index', {
     user: 'ethan'
   })
+  await ctx.writeCache('a.html', ctx.body)
 })
 
 module.exports = router.routes();
