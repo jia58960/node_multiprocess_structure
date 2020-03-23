@@ -1,7 +1,7 @@
 const Router = require('koa-router')
 const router = new Router()
 const {
-  getUserById
+  getUserList
 } = require('@/models/User')
 
 const {
@@ -10,7 +10,7 @@ const {
 
 // 验证数据库是否配置成功
 router.get('/a', async (ctx) => {
-  ctx.body = await getUserById('0de11349fbce49a4bcefa382d9b1bb0e')
+  ctx.body = await getUserList()
   // ctx.body = 998
 
 })
@@ -31,6 +31,14 @@ router.get('/d', async (ctx) => {
     ctx.session.count = 0
   }
   ctx.session.count++;
-  ctx.body = `欢迎您第${ctx.session.count}次访问本站`;
+  ctx.body = `欢迎您第${ctx.session.count}次访问本站`;  
 })
+
+router.get('/index.html', async (ctx) => {
+  console.log('渲染了')
+  await ctx.render('index', {
+    user: 'ethan'
+  })
+})
+
 module.exports = router.routes();

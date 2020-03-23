@@ -5,17 +5,20 @@ const path = require('path')
 const cluster = require('cluster')
 const startFunc = require('./app')
 
+// 动态读取文件，重写module.exports方法
 function myRequire(name) {
 	const file = fs.readFileSync(name).toString()
 	let module = {}
 	eval(file) // 慎用，危险
 	return module.exports;
 }
+
 if (cluster.isMaster) {
 	console.log('主进程启动了')
 
-	// 主进程每隔1s检测是否有版本更新，若有更新做不停服处理
+	// 主进程每隔1s检测是否有版本更新，若有更新做热更新处理
 	setInterval(() => {
+		
 		let newConfig = myRequire(path.resolve(__dirname, './config.js'))
 		for (let name in newConfig.apps) {
 			let newApp = newConfig.apps[name];
@@ -35,14 +38,15 @@ if (cluster.isMaster) {
 		config = newConfig;
 	}, 1000)
 
+	// 创建子进程
 	function createWoker(app) {
 		if (!app.enabled) return;
-		// worker == child process
+		// worker => child process
 		let worker = cluster.fork();
 
 		worker.on('exit', code => {
 			console.log('子进程退出了', code);
-			if (code) {
+			if (code) { // 非正常退出，1s后自动重启子进程
 				//重启子进程
 				setTimeout(function () {
 					createWoker(app);

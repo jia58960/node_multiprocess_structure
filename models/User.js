@@ -11,8 +11,9 @@ async function getUserByName(name) {
   return rows[0]
 }
 
-async function getUserList(name) {
-
+async function getUserList() {
+  const rows = await web.query("SELECT Host,User FROM user")
+  return rows
 }
 
 module.exports = {

@@ -3,10 +3,8 @@ const http = require('http')
 const databaseConnection = require('./connections/databases')
 const redisConnection = require('./connections/redis')
 const sessionConf = require('./connections/session')
-module.exports = async function ({
-  port,
-  entry
-}) {
+const ejsRender = require('./render/ssr')
+module.exports = async function (config) {
   const app = new Koa()
   // 批量连接数据库
   await databaseConnection()
@@ -17,11 +15,15 @@ module.exports = async function ({
   // 配置ression
   await sessionConf(app)
 
-  app.use(require(entry))
-  const httpServer = http.createServer(app.callback())
+  //ssr渲染
+  await ejsRender(app, config)
 
-  httpServer.listen(port, () => {
-    console.log(`server is running`, port)
+  // 引入文件入口
+  app.use(require(config.entry))
+
+  const httpServer = http.createServer(app.callback())
+  httpServer.listen(config.port, () => {
+    console.log(`server is running`, config.port)
   })
   return httpServer
 }
