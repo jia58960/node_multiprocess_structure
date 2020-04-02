@@ -8,7 +8,8 @@ NodeJS多进程项目基础架子，包含Koa，koa-router及连接mysql数据�
 
 yarn install
 
-node server
+windows: yarn dev
+linux: yarn prod
 
 ## 注意事项
 
