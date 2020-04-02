@@ -2,7 +2,11 @@
 
 ## 项目描述
 
-NodeJS多进程项目基础架子，包含Koa，koa-router及连接mysql数据库等。
+NodeJS多进程项目基础架子
+
+## 关键词
+
+Koa、MySql、Redis、EJS、React、SSR、集群...
 
 ## 食用方法
 
