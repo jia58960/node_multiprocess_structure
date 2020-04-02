@@ -23,6 +23,7 @@ module.exports = async function (config) {
 
   const httpServer = http.createServer(app.callback())
   httpServer.listen(config.port, () => {
+    console.log(`应用入口`, config.entry)
     console.log(`server is running`, config.port)
   })
   return httpServer

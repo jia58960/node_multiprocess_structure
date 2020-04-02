@@ -1,4 +1,6 @@
 require('module-alias/register')
+const argv = require('minimist')(process.argv.slice(2));
+process._argv = argv
 let config = require('./config')
 const fs = require('fs')
 const path = require('path')
@@ -18,7 +20,7 @@ if (cluster.isMaster) {
 
 	// 主进程每隔1s检测是否有版本更新，若有更新做热更新处理
 	setInterval(() => {
-		
+
 		let newConfig = myRequire(path.resolve(__dirname, './config.js'))
 		for (let name in newConfig.apps) {
 			let newApp = newConfig.apps[name];
