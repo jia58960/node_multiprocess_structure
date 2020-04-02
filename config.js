@@ -2,11 +2,11 @@ const path = require('path')
 const mode = process._argv.env === 'dev' ? 'dev' : 'prod'
 module.exports = {
 	apps: {
-		admin: {
+		web: {
 			version: '0.0.2',
 			enabled: true,
-			entry: path.resolve(__dirname, './apps/admin'),
-			tmplRoot: path.resolve(__dirname, './apps/admin/template'),
+			entry: path.resolve(__dirname, './apps/web'),
+			tmplRoot: path.resolve(__dirname, './apps/web/template'),
 			minifyTmpl: true,
 			cacheDir: mode === 'dev' ? __dirname : '/usr/share/nginx/html',
 			port: 8080
@@ -26,7 +26,7 @@ module.exports = {
 			port: 3306,
 			user: 'ethan',
 			password: '123456',
-			database: 'mysql'
+			database: 'meituan'
 		}
 	},
 	redis: {
@@ -35,5 +35,7 @@ module.exports = {
 			port: 6379,
 			password: '111111'
 		}
-	}
+	},
+	// 静态服务器列表
+	staticServers: ['ethan1.mtw.cn', 'ethan2.mtw.cn', 'ethan3.mtw.cn']
 }

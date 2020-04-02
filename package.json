@@ -23,6 +23,6 @@
   "_moduleAliases": {
     "@/models": "./models",
     "@/core": "./core",
-    "@/": "./"
+    "@/config": "./config.js"
   }
 }
