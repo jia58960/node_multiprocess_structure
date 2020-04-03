@@ -13,8 +13,9 @@ Koa、MySql、Nginx、Redis、EJS、React、SSR、集群、负载均衡、反向
 yarn install
 
 windows: yarn dev
+
 linux: yarn prod
 
 ## 注意事项
 
-运行之前自行修改config.js下的mysql数据库配置
+运行之前自行修改config.js下的mysql、redis等配置项
