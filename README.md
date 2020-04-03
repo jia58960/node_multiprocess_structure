@@ -6,7 +6,7 @@ NodeJS多进程项目基础架子
 
 ## 关键词
 
-Koa、MySql、Redis、EJS、React、SSR、集群...
+Koa、MySql、Nginx、Redis、EJS、React、SSR、集群、负载均衡、反向代理、多进程架构...
 
 ## 食用方法
 
