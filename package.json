@@ -14,7 +14,7 @@
     "koa-ejs": "^4.3.0",
     "koa-router": "^8.0.8",
     "koa-session": "^5.13.1",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "module-alias": "^2.2.2",
     "promise-fs": "^2.1.1",
     "promise-mysql": "^4.1.3",
